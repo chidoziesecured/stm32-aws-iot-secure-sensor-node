@@ -1,0 +1,5 @@
+../IOT_SDK/BSP/dht11.c:5:13:delay_us	2
+../IOT_SDK/BSP/dht11.c:11:13:dht11_set_pin_output	1
+../IOT_SDK/BSP/dht11.c:20:13:dht11_set_pin_input	1
+../IOT_SDK/BSP/dht11.c:28:6:dht11_init	1
+../IOT_SDK/BSP/dht11.c:42:16:dht11_read	16

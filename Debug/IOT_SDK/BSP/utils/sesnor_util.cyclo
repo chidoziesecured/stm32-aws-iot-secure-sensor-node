@@ -1,0 +1,3 @@
+../IOT_SDK/BSP/utils/sesnor_util.c:8:5:init_temperature_humidity_sensor	1
+../IOT_SDK/BSP/utils/sesnor_util.c:15:6:get_temperature_reading	3
+../IOT_SDK/BSP/utils/sesnor_util.c:30:6:get_humidity_reading	2
