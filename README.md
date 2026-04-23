@@ -2,24 +2,6 @@
 
 A bare-metal embedded IoT system that reads environmental sensor data on an STM32F446RE microcontroller, transmits it securely over TLS-encrypted MQTT to AWS IoT Core via an ESP32 Wi-Fi bridge, and receives cloud commands in real time.
 
-## System Overview
-
-┌──────────────┐    UART4     ┌──────────────┐   TLS/MQTT    ┌──────────────┐
-
-│   STM32F4    │◄────────────►│   ESP32-AT   │◄─────────────►│  AWS IoT     │
-
-│  Nucleo-F446RE│  AT Commands │  WROOM-32    │   Port 8883   │   Core       │
-
-│              │              │              │               │              │
-
-│  • FreeRTOS  │              │  • Wi-Fi     │               │  • MQTT      │
-
-│  • DHT11     │              │  • TLS 1.2   │               │  • Rules     │
-
-│  • DMA+IDLE  │              │  • X.509     │               │  • Shadows   │
-
-└──────────────┘              └──────────────┘               └──────────────┘
-
 ## Architecture
 
 The system implements a producer-consumer pattern using three FreeRTOS tasks communicating through message queues:
@@ -41,36 +23,6 @@ DMA with idle-line detection on UART4 provides non-blocking reception of AT resp
 | Temp/Humidity Sensor | DHT11 (single-wire, ±2°C / ±5% RH) | GPIO PA4 with DWT microsecond timing |
 | Debug Console | ST-Link V2 Virtual COM Port | USART2 (PA2/PA3), 115200 baud |
 | Reset Control | Nucleo NRST → ESP32 EN | GPIO |
-
-### Wiring Diagram
-
-STM32 Nucleo-F446RE          ESP32-WROOM-32
-
-┌────────────────┐           ┌────────────────┐
-
-│ 5V        ─────────────────── VIN            │
-
-│ GND       ─────────────────── GND            │
-
-│ NRST      ─────────────────── EN             │
-
-│ A0 (PA0)  ─────────────────── RX2 (GPIO16)   │
-
-│ A1 (PA1)  ─────────────────── TX2 (GPIO17)   │
-
-└────────────────┘           └────────────────┘
-
-STM32 Nucleo-F446RE          DHT11 Module
-
-┌────────────────┐           ┌────────────────┐
-
-│ 3V3       ─────────────────── VCC            │
-
-│ GND       ─────────────────── GND            │
-
-│ A2 (PA4)  ─────────────────── S (Signal)     │
-
-└────────────────┘           └────────────────┘
 
 ## Software Stack
 
